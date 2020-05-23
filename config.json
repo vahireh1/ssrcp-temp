@@ -1,0 +1,23 @@
+{
+    "port" : 3000,
+    "security": {
+        "tokenLife" : 3600
+    },
+    "mongoose": {
+        "host": "ds361768.mlab.com",
+                "user": "admin",
+                "password": "Welcome1",
+                "dbName":"ssrcp",
+                "port": "61768"
+    },
+    "smtpConfig": {
+        "host": "smtp.gmail.com",
+        "secureConnection": false,
+        "port": 587,
+        "auth": {
+            "user" : "developersgarden@gmail.com",
+            "pass" : "1360602010"
+        },
+        "from": "noreply@scheduleApp.com"
+    }
+}
