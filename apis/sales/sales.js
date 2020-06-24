@@ -57,12 +57,13 @@ var VALIDATE = utils.CONSTANTS.VALIDATE;
 var validate = utils.validate;
 var mongoUtils = utils.mongoUtils;
 
-function create(sales, callback) {
+function create(sales, callback) {	
 	console.log("before ");
 	var salesAPI = SalesController.SalesAPI(sales);
 	console.log("After,",salesAPI);
 	var errorList = [];
     if (!salesAPI.getItems()) {
+		console.log("IN ITEMS ERROR>>>>>>>>>>>>>>>>>>>>>>>");
        	var e = {
 				status: VALIDATE.FAIL,
 				error: utils.formatText(VALIDATE.REQUIRED, 'items')
@@ -85,7 +86,7 @@ function create(sales, callback) {
 		};
 		errorList.push(e);
     }
-    if (!salesAPI.getcustomerNumber()) {
+    if (!salesAPI.getCustomerNumber()) {
          var e = {
 					status: VALIDATE.FAIL,
 					error: utils.formatText(VALIDATE.REQUIRED, 'customerNumber')
@@ -93,13 +94,13 @@ function create(sales, callback) {
 		errorList.push(e);
 	}
 	
-  
    	if (errorList.length) {
 		  throw {
 		    status: REQUEST_CODES.FAIL,
 		    error: errorList
 		  };
 	}  else {
+		console.log("IN SAVE METHOD>>>>>>>");
 		var salesModel = new SalesModel(salesAPI);
 	    mongoUtils.getNextSequence('salesLogId', function(oSeq) {
 			salesModel.salesLogId = oSeq;
@@ -122,9 +123,11 @@ function create(sales, callback) {
 	   		});
 	   	});
 	}
+
 }
 
 function getDetails(salesLogId, callback) {
+	console.log('sales records checking>>>>>>>>>>>>');
 	SalesModel.find({'salesLogId': salesLogId}, function(error, salesRecords) {
 		if (error) {
 			callback({
@@ -134,7 +137,7 @@ function getDetails(salesLogId, callback) {
 			return;
 		} else {
 			salesRecords = salesRecords.map(function(salesRecord) {
-				return new SalesController.SalesLogAPI(salesRecord);
+				return new SalesController.SalesAPI(salesRecord);
 			});
 			callback({
 				status: REQUEST_CODES.SUCCESS,

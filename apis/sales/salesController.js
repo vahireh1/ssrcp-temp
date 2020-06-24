@@ -6,7 +6,7 @@ var validate = utils.validate;
 
 var SalesLog = function() {
     return {
-        // salesLogId: 0,
+         salesLogId: 0,
         items: [],
         comments: null,
         customerName: null,
@@ -23,17 +23,17 @@ function SalesAPI(salesRecord) {
     console.log("7#####");
     var sales = new SalesLog();
 
-    sales.getSalesLogId = function() {
-        return this.salesLogId;
+    sales.getSales = function() {
+        return this.sales;
     };
-    sales.setSalesLogId = function(salesLogId) {
-        if (salesLogId) {
-            if (validate.isInteger(salesLogId + '')) {
-                    this.salesLogId = salesLogId;
+    sales.setSales = function(sales) {
+        if (sales) {
+            if (validate.isInteger(sales + '')) {
+                    this.sales = sales;
             } else {
                 throw {
                     status: VALIDATE.FAIL,
-                    error: utils.formatText(VALIDATE.NOT_A_INTEGER, salesLogId, 'salesLogId')
+                    error: utils.formatText(VALIDATE.NOT_A_INTEGER, sales, 'sales')
                 };
             }
         }
@@ -180,7 +180,7 @@ function SalesAPI(salesRecord) {
     if (salesRecord) {
         var errorList = [];
         try {
-            sales.setSalesLogId(salesRecord.salesLogId);
+            sales.setSales(salesRecord.sales);
          } catch (e) {
              console.log("1");
             errorList.push(e);

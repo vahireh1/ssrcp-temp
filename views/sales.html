@@ -245,7 +245,6 @@
         $(document).ready(function () {
           $(".only-numeric").bind("keypress", function (e) {
             console.log("Sales list checking######");
-
             var keyCode = e.which ? e.which : e.keyCode
             if (!(keyCode >= 48 && keyCode <= 57)) {
               $(".error").css("display", "inline");
@@ -273,7 +272,7 @@
 	   if(resp.status == "Success" ){
 	   alert('sucess')
 	   } else{
-	       alert("sucess");
+	       alert("error");
 	    }
 	});
 
@@ -304,16 +303,15 @@
             if (resp.status == 'Success') {
               loadSalesGrid(resp.result);
             } else {
-              // alert(resp.status);
+              // alert("sucess");
             }
-          });
+          });           
         } 
        // getSalesLogList
         getsalesList();
         var formattedSalesObj = [];
         function loadSalesGrid(result) {
           console.log('slesGrid checking');
-
           console.log("loadSalesGrid ::: function enter", result);
           var formattedSalesObj= [];
           result.forEach(obj => {
@@ -330,7 +328,6 @@
             tempSalesObj.push(obj.updatedBy);
             formattedSalesObj.push(tempSalesObj);
           });
-
           console.log("restult checking", formattedsalesObj);
           $('#dataTable').DataTable({
             data: formattedSalesObj,
