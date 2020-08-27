@@ -55,13 +55,6 @@ var mongoUtils = utils.mongoUtils;
 function create(productionLog, callback) {
 	var productionLogAPI = ProductionLogController.ProductionLogAPI(productionLog);
     var errorList = [];
-   	if (!productionLogAPI.getProductionLogId()) {
-		var e = {
-			status: VALIDATE.FAIL,
-			error: utils.formatText(VALIDATE.REQUIRED, 'productionLogId')
-		};
-		errorList.push(e);
-	}
 	if (!productionLogAPI.getTileModelId()){
         var e ={
 			status: VALIDATE.FAIL,
@@ -73,7 +66,7 @@ function create(productionLog, callback) {
 	if (!productionLogAPI.getQuantity()) {
 		var e = {
 			status: VALIDATE.FAIL,
-			error: utils.formatText(VALIDATE.REQUIRED, 'qtty')
+			error: utils.formatText(VALIDATE.REQUIRED, 'quantity')
 		};
 		errorList.push(e);
 	}
@@ -81,13 +74,6 @@ function create(productionLog, callback) {
         var e ={
 			status: VALIDATE.FAIL,
 			error: utils.formatText(VALIDATE.FIELD_VALUE_INVALID, 'comments')
-		};
-		errorList.push(e);
-	} 
-	if (!productionLogAPI.getDateCreated()){
-        var e ={
-			status: VALIDATE.FAIL,
-			error: utils.formatText(VALIDATE.FIELD_VALUE_INVALID, 'date')
 		};
 		errorList.push(e);
 	} 

@@ -23,54 +23,7 @@
 <a class="scroll-to-top rounded" href="#page-top">
   <i class="fas fa-angle-up"></i>    
   </a>  
-  <div class="modal fade" id="productionLog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Floor and Tiles Services</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <h6>CHOOSE-MATERIAL</h6>
-        </div>
-          <div class="modal-body">
-            <div class="dropdown">
-              <select class="form-control" id="ok">
-                <option value="CarParking-Tile">CARPARKING-TILE</option>
-                <option value="Zig-Zag">ZIG-ZAG</option>
-                <option value="AGT">AGT</option>
-                <option value="Ceramic">CERAMIC</option>
-              </select>
-          </div>
-          </div>
-          <div class="form-group">
-            <div class="modal-body">
-              <input type="text" id="productionLogId" class="form-control" placeholder="PRODUCTIONLOGID" autofocus="autofocus">
-            </div>
-          </div>
-          <div class="form-group">
-          <div class="modal-body">
-                <input type="text" id="comments" class="form-control" placeholder="COMMENTS" autofocus="autofocus">
-                <span id="errorTextarea" style="display: none; color:green; font-size:12px"><b>enter valid details</b></span>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="modal-body">
-                <input type="text" id="qtty" class="form-control" placeholder="QUANTITY" autofocus="autofocus">
-              <span class="error" style="color:green; display: none">Input digits (0 - 9)</span>
-            </div>
-            </div>
-            <div class="modal-footer">
-              <input type="Cancel" class="btn btn-primary" value="Cancel">
-              <input type="Submit" id="sendData" onclick="addProduction()" class="btn btn-success" data-dismiss="modal"
-                value="Submit">
-            </div>
-          </div>
-        </div>
-     </div>
-      <body id="page-top">
+    <body id="page-top">
         <div class="container">
           <div id="successMess" style="display: none" time="10sec">
             <div class="alert alert-success">
@@ -96,7 +49,7 @@
       <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown no-arrow">
           <button type="button" class="btn btn-info btn-lg, btn pull-right" data-toggle="modal"
-            data-target="#productionLog">ProductionLog</button>
+            data-target="#productionLog" onclick="getDashboardTilesList()">ProductionLog</button>
         </li>
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
@@ -239,6 +192,41 @@
     <div class="modal__footer"></div>
 </div>
     
+<!-- Production Log Modal Window -->
+<div class="modal fade" id="productionLog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Floor and Tiles Services</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="form-group">
+          <div class="dropdown">
+            <select class="form-control" id="tileModelDropdown"></select>
+        </div>
+      </div>
+      <div class="form-group">
+          <input type="text" id="productionLogId" class="form-control" placeholder="PRODUCTIONLOGID" autofocus="autofocus">
+      </div>
+        <div class="form-group">
+          <input type="text" id="comments" class="form-control" placeholder="COMMENTS" autofocus="autofocus">
+          <span id="errorTextarea" style="display: none; color:green; font-size:12px"><b>enter valid details</b></span>
+        </div>
+        <div class="form-group">
+            <input type="text" id="qtty" class="form-control" placeholder="QUANTITY" autofocus="autofocus">
+          <span class="error" style="color:green; display: none">Input digits (0 - 9)</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input type="button" id="sendData" onclick="addProduction()" class="btn btn-success" 
+          value="Submit">
+          <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancel">
+      </div>
+    </div>
+   </div>
       <!--:::::::: Bootstrap core JavaScript:::::::::::-->
       <script src="vendor/jquery/jquery.min.js"></script>
       <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -329,7 +317,22 @@
             ],
             bDestroy: true
           });
-        }  
+        } 
+
+        function getDashboardTilesList(){
+          $.get({ url : '/tileModels'}, function(resp){ 
+            if(resp.status == 'Success'){
+              var result = resp.result, formattedText = '<option value="" style="display: none;">Select Tile Model</option>';
+              result.forEach(obj => {
+                formattedText = formattedText  + '<option value="'+obj.tileModelId+'" >'+obj.tileModelName +'</option>';
+                console.log(formattedText);
+              });
+              $('#tileModelDropdown').html(formattedText);
+            }else{
+              alert(resp.status);
+            }
+          });
+        } 
 </script>
 </body>
 </html>
