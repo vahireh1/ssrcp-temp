@@ -77,17 +77,18 @@
       </li>
       <li class="nav-item  active">
         <a class="nav-link" href="/models">
-            <i class="fa fa-list-alt" aria-hidden="true"></i>
-          <span>Tile Models</span></a>
-      <li class="nav-item active">
-        <a class="nav-link" href="/productionLogPage">
-          <i class="fa fa-list-alt" aria-hidden="true"></i>
-          <span>productionLog</span></a>
+          <i class="fa fa-cubes" aria-hidden="true"></i>
+          <span>TileModels</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/productionLog">
+          <i class="fas fa-layer-group"></i>
+          <span>Productionlog</span></a>
+      </li> 
+      <li class="nav-item active">
+        <a class="nav-link" href="/contact">
           <i class="fas fa-fw fa-table"></i>
-          <span>Enquiries</span></a>
+          <span>Contact</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="/sales">
@@ -209,14 +210,14 @@
         </div>
       </div>
       <div class="form-group">
-          <input type="text" id="productionLogId" class="form-control" placeholder="PRODUCTIONLOGID" autofocus="autofocus">
+          <input type="text" id="productionLogId" class="form-control" placeholder="ProductionLogId" autofocus="autofocus">
       </div>
         <div class="form-group">
-          <input type="text" id="comments" class="form-control" placeholder="COMMENTS" autofocus="autofocus">
+          <input type="text" id="comments" class="form-control" placeholder="Comments" autofocus="autofocus">
           <span id="errorTextarea" style="display: none; color:green; font-size:12px"><b>enter valid details</b></span>
         </div>
         <div class="form-group">
-            <input type="text" id="qtty" class="form-control" placeholder="QUANTITY" autofocus="autofocus">
+            <input type="text" id="qtty" class="form-control" placeholder="Quantity" autofocus="autofocus">
           <span class="error" style="color:green; display: none">Input digits (0 - 9)</span>
         </div>
       </div>
@@ -288,7 +289,7 @@
         function getProductionLogList() {
           console.log("test list");
           $.get({ url: '/productionLogs' }, function (resp) {
-            console.log("check :: productionLogRecords", resp.result);
+            console.log("check  productionLogRecords", resp.result);
             if (resp.status == 'Success') {
               loadProductionLogGrid(resp.result);
             } else {

@@ -66,7 +66,7 @@ routes(app);
 if (app.get('env') === 'development') {
     // set app defaults for local
     app_host = process.env.HOST || 'localhost';
-    app_port = process.env.PORT || 3000;    
+    app_port = process.env.PORT || 9000;    
 } else {
     //set app defaults for heroku
     app_host = process.env.HOST;
