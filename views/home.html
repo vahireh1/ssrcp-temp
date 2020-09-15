@@ -36,8 +36,7 @@
             <p><strong>ERROR!</strong> Try again.</p>
           </div>
         </div>
-     </div> 
-    
+     </div>  
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
     <a class="navbar-brand mr-1" href="index.html">SSRCP </a>
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
@@ -75,9 +74,9 @@
         </a>
       </li>
       <li class="nav-item  active">
-        <a class="nav-link" href="/models">
+        <a class="nav-link" href="/tileModels">
           <i class="fa fa-cubes" aria-hidden="true"></i>
-          <span>TileModels</span></a>
+          <span>TileModel</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="/productionLog">
@@ -190,8 +189,7 @@
     <div class="modal__header"></div>
     <div class="modal__content"></div>
     <div class="modal__footer"></div>
-</div>
-    
+</div>    
 <!-- Production Log Modal Window -->
 <div class="modal fade" id="productionLog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -202,6 +200,9 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
+      <div class="form-group">
+        <input type="text" id="productionLogId" class="form-control" placeholder="ProductionLog Id" autofocus="autofocus">
+      </div>
       <div class="modal-body">
       <div class="form-group">
           <div class="dropdown">
@@ -209,16 +210,13 @@
         </div>
       </div>
       <div class="form-group">
-          <input type="text" id="productionLogId" class="form-control" placeholder="ProductionLogId" autofocus="autofocus">
+        <input type="text" id="qtty" class="form-control" placeholder="Quantity" autofocus="autofocus">
+      <span class="error" style="color:green; display: none">Input digits (0 - 9)</span>
+     </div>
+      <div class="form-group">
+        <input type="text" id="comments" class="form-control" placeholder="Comments" autofocus="autofocus">
+        <span id="errorTextarea" style="display: none; color:green; font-size:12px"><b>enter valid details</b></span>
       </div>
-        <div class="form-group">
-          <input type="text" id="comments" class="form-control" placeholder="Comments" autofocus="autofocus">
-          <span id="errorTextarea" style="display: none; color:green; font-size:12px"><b>enter valid details</b></span>
-        </div>
-        <div class="form-group">
-            <input type="text" id="qtty" class="form-control" placeholder="Quantity" autofocus="autofocus">
-          <span class="error" style="color:green; display: none">Input digits (0 - 9)</span>
-        </div>
       </div>
       <div class="modal-footer">
         <input type="button" id="sendData" onclick="addProduction()" class="btn btn-success" 
@@ -285,7 +283,8 @@
         function getProductionLogList() {
           console.log("test list");
           $.get({ url: '/productionLogs' }, function (resp) {
-            console.log("check  productionLogRecords", resp.result);
+            // console.log("check  productionLogRecords", resp.result);
+            console.log("testing PLList");
             if (resp.status == 'Success') {
               loadProductionLogGrid(resp.result);
             } else {
@@ -317,7 +316,7 @@
         } 
 
         function getDashboardTilesList(){
-          $.get({ url : '/tileModels'}, function(resp){ 
+          $.get({ url : '/tileModel'}, function(resp){ 
             if(resp.status == 'Success'){
               var result = resp.result, formattedText = '<option value="" style="display: none;">Select Tile Model</option>';
               result.forEach(obj => {

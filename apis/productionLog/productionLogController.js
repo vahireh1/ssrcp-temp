@@ -6,14 +6,12 @@ var validate = utils.validate;
 
 var ProductionLogModel = function() {
     return {
-        productionLogId: 0,
         tileModelId: 0,
+        productionLogId: 0,
         comments: null,
         quantity: 0,
-        productionDate: 0,
-        createdBy: 0,
         dateCreated: 0,
-        updatedBy: 0,
+        createdBy: 0,
         dateUpdated: 0
     };
 };

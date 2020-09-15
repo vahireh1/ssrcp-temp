@@ -6,13 +6,13 @@ var validate = utils.validate;
 
 var TileModel = function() {
     return {
-        tileModelId: 0,
-        tileModelName: null,
+        // tileModelId: 0,
+        ModelName: null,
         color: null,
         modelNumber: null,
         modelImage: null,
         quantity: 0,
-        isAvailable: false,
+        tileModels: false,
         createdBy: 0,
         dateCreated: 0,
         updatedBy: 0,
@@ -39,7 +39,7 @@ function TileModelAPI(tileModelRecord) {
         }
     };
     tileModel.getTileModelName = function() {
-        return this.tileModelName;
+        return this.modelName;
     };
     tileModel.setTileModelName = function(tileModelName) {
          if (tileModelName) {
@@ -99,14 +99,20 @@ function TileModelAPI(tileModelRecord) {
             }
         }
     };
-    tileModel.getIsAvailable = function() {
-        return this.isAvailable;
+    tileModel.getTileModel = function() {
+        return this.tileModel;
     };
-    tileModel.setIsAvailable = function(isAvailable) {
-        if (false == isAvailable || true == isAvailable) {
-            this.isAvailable = isAvailable;
+    tileModel.setTileModel = function(tileModel) {
+        if (false == tileModel || true == tileModel) {
+            this.tileModel = tileModel;
         }
     };
+    tileModel.getTileModels = function(){
+
+    }
+    tileModel.setTileModels = function(tileModel) {
+        this.tileModels;
+    }
     tileModel.getCreatedBy = function() {
         return this.createdBy;
     };
@@ -153,16 +159,16 @@ function TileModelAPI(tileModelRecord) {
         }
     };
     tileModel.getUpdatedBy = function() {
-        return this.updatedby;
+        return this.updatedBy;
     };
-    tileModel.setUpdatedBy = function(updatedby) {
-        if (updatedby) {
-            if (validate.isNumber(updatedby)) {
-                this.updatedby = updatedby;
+    tileModel.setUpdatedBy = function(updatedBy) {
+        if (updatedBy) {
+            if (validate.isNumber(updatedBy)) {
+                this.updatedBy = updatedBy;
             } else {
                 throw {
                     status: VALIDATE.FAIL,
-                    error: utils.formatText(VALIDATE.NOT_A_INTEGER, updatedby, 'updatedby')
+                    error: utils.formatText(VALIDATE.NOT_A_INTEGER, updatedBy, 'updatedBy')
                 };
             }
         }
@@ -172,56 +178,67 @@ function TileModelAPI(tileModelRecord) {
         var errorList = [];
         try {
             tileModel.setTileModelId(tileModelRecord.tileModelId);
+            console.log('test1');
          } catch (e) {
             errorList.push(e);
         }
         try {
             tileModel.setTileModelName(tileModelRecord.tileModelName);
+            console.log('test2');
         } catch (e) {
             errorList.push(e);
         }
         try {
             tileModel.setColor(tileModelRecord.color);
+            console.log('test3');
         } catch (e) {
             errorList.push(e);
         }
         try {
             tileModel.setModelNumber(tileModelRecord.modelNumber);
+            console.log('test4');
         } catch (e) {
            errorList.push(e);
         }
         try {
             tileModel.setModelImage(tileModelRecord.modelImage);
+            console.log('test5');
         } catch (e) {           
             errorList.push(e);
         }
         try {
             tileModel.setQuantity(tileModelRecord.quantity);
+            console.log('test7');
         } catch (e) {
             errorList.push(e);
         }
         try {
-            tileModel.setIsAvailable(tileModelRecord.isAvailable);
+            tileModel.setTileModels(tileModelRecord.tileModels);
+            console.log('test8');
         } catch (e) {
             errorList.push(e);
         }
         try {
             tileModel.setCreatedBy(tileModelRecord.createdBy);
+            console.log('test9');
         } catch (e) {
            errorList.push(e);
         }
         try {
             tileModel.setDateCreated(tileModelRecord.dateCreated);
+            console.log('test10');
         } catch (e) {           
             errorList.push(e);
         }
         try {
-            tileModel.setUpdatedBy(tileModelRecord.updatedby);
+            tileModel.setUpdatedBy(tileModelRecord.updatedBy);
+            console.log('test11');
         } catch (e) {
             errorList.push(e);
         }
         try {
             tileModel.setDateUpdated(tileModelRecord.dateUpdated);
+            console.log('test12');
         } catch (e) {
             errorList.push(e);
         }

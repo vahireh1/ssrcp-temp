@@ -19,8 +19,9 @@ module.exports = function(app) {
 		}
 	});
   
-    app.get('/tileModels',function(req, res){
+    app.get('/tileModel',function(req, res){
 		try{
+			console.log("TILEMODELS GET FUNCTION");
 			getList(req.query, function(response){
 				res.json(response);
 			});
@@ -31,6 +32,7 @@ module.exports = function(app) {
 	});
 	app.put('/tileModel',function(req, res){
 		try{
+			console.log('update chaching');
 			update(req.parmas.tileModelId, function(response){
 				res.json(response);
 			});
@@ -46,7 +48,6 @@ Schema = mongoose.Schema;
 var TileModelSchema = new Schema(require('./tileModelSchema').tileModelSchema, {collection: 'tileModel'});
 var TileModel = mongoose.model('tileModel', TileModelSchema);
 var TileModelController = require('./tileModelController');
-
 var utils = require('../../assets/utils').utils;
 var CONSTANTS = utils.CONSTANTS;
 var DB_CODES = CONSTANTS.DATABASE_CODES;
@@ -90,6 +91,13 @@ function create(tileModel, callback) {
 		errorList.push(e);
 	}
 	 
+    if (!tileModelAPI.getTileModels()) {
+        var e = {
+					status: VALIDATE.FAIL,
+					error: utils.formatText(VALIDATE.REQUIRED, 'tileModels')
+         	};
+		errorList.push(e);
+	}
    	if (errorList.length) {
 		throw {
 			status: REQUEST_CODES.FAIL,
@@ -97,7 +105,9 @@ function create(tileModel, callback) {
 		};
 	} else {
 		var tileModel = new TileModel(tileModelAPI);
+		console.log("before getNextSequence checking");
 	    mongoUtils.getNextSequence('tileModelId', function(oSeq) {
+			console.log("after getNextSequence checkingggg");
 			tileModel.tileModelId = oSeq;
 			tileModel.dateCreated = utils.getSystemTime();
 			tileModel.save(function(error) {
@@ -149,7 +159,7 @@ function getList(query, callback) {
 			});
 			return;
 		} else {
-			tileModelRecords = tileModelRecords.map(function(tileModelRecord) {
+    		tileModelRecords = tileModelRecords.map(function(tileModelRecord) {
 				return new TileModelController.TileModelAPI(tileModelRecord);
 			});
 			callback({
@@ -161,9 +171,9 @@ function getList(query, callback) {
 	});
 }
 
-function update(tileModel, callback) {
+function updateTilemodel(tileModel, callback) {
 	tileModel.dateUpdated = utils.getSystemTime();
-	TileModel.update({"tileModelId": tileModel.tileModelId}, {$set: tileModel}, function(error, effectedRows) {
+	TileModel.update({"tileModel": tileModel.tileModelId}, {$set: tileModel}, function(error, effectedRows) {
 		if (error) {
 			callback({
 				status: DB_CODES.FAIL,
@@ -187,4 +197,4 @@ function update(tileModel, callback) {
 		}
 	});
 }
-
+module.exports.getList = getList;

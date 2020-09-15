@@ -16,10 +16,10 @@ module.exports.productionLogSchema = {
                                     type: Number,
                                     required: true
                                 },
-                                productionDate: {
-                                    type: Number,
-                                    required: true                                   
-                                },
+                                // productionDate: {
+                                //     type: Number,
+                                //     required: true                                   
+                                // },
                                 dateCreated: {
                                     type: Number,
                                     required: true                                   
@@ -28,9 +28,9 @@ module.exports.productionLogSchema = {
                                     type: Number,
                                     required: true                                
                                 },
-                                dateUpdated: {
-                                    type: Number
-                                },
+                                // dateUpdated: {
+                                //     type: Number
+                                // },
                                 updatedBy: {
                                     type: Number
                                 }

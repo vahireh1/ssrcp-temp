@@ -2,7 +2,7 @@ module.exports.tileModelSchema = {
                                tileModelId: {
                                     type: Number,
                                     unique: true,
-                                    required: true,
+                                     required: true,
                                     index: true
                                 },
                                 tileModelName: { 

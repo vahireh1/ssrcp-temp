@@ -99,14 +99,14 @@
           </li> 
           
           <li class="nav-item active">
-            <a class="nav-link" href="/models">
+            <a class="nav-link" href="/tileModels">
             <i class="fa fa-cubes" aria-hidden="true"></i>
-            <span>TileModels</span>
+            <span>TileModel</span>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="/productionLog">
-              <i class="fas fa-layer-group"></i>
+              <i class="fa fa-list-alt" aria-hidden="true"></i>
               <span>ProductionLog</span></a>
           </li>        
         <li class="nav-item">
@@ -137,11 +137,12 @@
             <table class="table table-bordered" id="tileModeldataTable" width="100% " length="100%" cellspacing="0">
                 <thead>
                 <tr>
-                  <th>ModelName</th>
-                  <th>Colors</th>
+                  <!-- <th>S.No</th> -->
+                  <th>TileModel Name</th>
+                  <th>Color</th>
                   <th>ModelNumber</th>
                   <th>Quantity</th>
-                  <th>Availability</th>
+                  <th>TileModels</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -163,68 +164,68 @@
     </div>
                <!-- ADD TILE MODELPAGE -->
     <div class="modal fade" id="addTilesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+       <div class="modal-dialog" role="document">
           <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Add Tile Model</h5>
-              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <div id="tileModelSuccessMess" class="alert alert-success" style="display: none;">
-                  <strong>Success!</strong> Tile Model Added Successfully.
-                </div>   
-                <div id="tileModelErrorMess" class="alert alert-danger" style="display: none;">
-                  <strong>Error!</strong> Please provide valid details.
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add Tile Model</h5>
+                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group">
+                              <div id="tileModelSuccessMess" class="alert alert-success" style="display: none;">
+                                <strong>Success!</strong> Tile Model Added Successfully.
+                              </div>   
+                              <div id="tileModelErrorMess" class="alert alert-danger" style="display: none;">
+                                <strong>Error!</strong> Please provide valid details.
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="form-label-group">
+                                <input type="text" id="tileModelName" class="form-control" placeholder="TileModelName" autofocus="autofocus">
+                                <label for="tileModelName">TileModelName </label>
+                              </div>
+                            </div>
+                        <div class="form-group">
+                          <div class="form-label-group">
+                            <input type="text" id="color" class="form-control" placeholder="Color" autofocus="autofocus">
+                            <label for="color">Color</label>
+                          </div>
+                        </div>
+                          <div class="form-group">
+                          <div class="form-label-group">
+                            <input type="text" id="modelNumber" class="form-control" placeholder="modelNumber" autofocus="autofocus">
+                            <label for="modelNumber">ModelNumber</label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-label-group">
+                            <input type="number" id="quantity" class="form-control" placeholder="quantity" required="required" autofocus="autofocus">
+                            <label for="quantity">quantity</label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-label-group">
+                            <select id="tilemodels" class="form-control" placeholder="tileModels" required="required" autofocus="autofocus">
+                              <option>TileModels</option>
+                              <option value="true">True</option>
+                            <option value="false">False</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group" id="tilesUpload">
+                          <div class="form-label-group">
+                            <input type="file" id="tileFile" class="form-control" placeholder="image" required="required">
+                          </div>
+                        </div>
+                    </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                      <button class="btn btn-success" onclick="addTile()">Create</button>
                 </div>
-              </div>
-            <div class="form-group">
-            <div class="form-label-group">
-              <input type="text" id="modelName" class="form-control" placeholder="Model Name" required="required" autofocus="autofocus"class="form-control form-control-sm">
-              <label for="modelName">ModelName</label>
             </div>
-            </div>
-          <div class="form-group">
-            <div class="form-label-group">
-              <input type="text" id="color" class="form-control" placeholder="Color" autofocus="autofocus">
-              <label for="color">Color</label>
-            </div>
-          </div>
-            <div class="form-group">
-            <div class="form-label-group">
-              <input type="text" id="modelNumber" class="form-control" placeholder="modelCode" autofocus="autofocus">
-              <label for="modelNumber">ModelCode</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="form-label-group">
-              <input type="number" id="quantity" class="form-control" placeholder="quantity" required="required" autofocus="autofocus">
-              <label for="quantity">quantity</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="form-label-group">
-              <select id="isAvailable" class="form-control" placeholder="isAvailable" required="required" autofocus="autofocus">
-                <option>Availability</option>
-                <option value="true">True</option>
-              <option value="false">False</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group" id="tilesUpload">
-            <div class="form-label-group">
-              <input type="file" id="tileFile" class="form-control" placeholder="image" required="required">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <button class="btn btn-success" onclick="addTile()">Create</button>
-          </div>
-        </div> 
-      </div>
-    </div>
+        </div>
     </div>
                 <!-- Edit tile modal page  -->
 
@@ -248,9 +249,8 @@
             </div>
           <div class="form-group">
           <div class="form-label-group">
-            <input type="hidden" id="editTileId" >
-            <input type="text" id="editModelName" class="form-control" placeholder="Model Name" required="required" autofocus="autofocus"class="form-control form-control-sm">
-            <label for="modelName">ModelName</label>
+            <input type="text" id="editTileModelName" class="form-control" placeholder="TileModelName" required="required" autofocus="autofocus"class="form-control form-control-sm">
+            <label for="tileModelName">TileModel Name</label>
           </div>
           </div>
         <div class="form-group">
@@ -261,20 +261,20 @@
         </div>
           <div class="form-group">
           <div class="form-label-group">
-            <input type="text" id="editModelNumber" class="form-control" placeholder="modelCode" autofocus="autofocus">
-            <label for="modelNumber">ModelCode</label>
+            <input type="text" id="editModelNumber" class="form-control" placeholder="modelNumber" autofocus="autofocus">
+            <label for="modelNumber">ModelNumber</label>
           </div>
         </div>
         <div class="form-group">
           <div class="form-label-group">
-            <input type="number" id="editQuantity" class="form-control" placeholder="quantity" required="required" autofocus="autofocus">
+            <input type="number" id="editQuantity" class="form-control" placeholder="Quantity" required="required" autofocus="autofocus">
             <label for="quantity">quantity</label>
           </div>
         </div>
         <div class="form-group">
           <div class="form-label-group">
-            <select id="editIsAvailable" class="form-control" placeholder="isAvailable" required="required" autofocus="autofocus">
-              <option value="">Availability</option>
+            <select id="editTileModels" class="form-control" placeholder="tileModels" required="required" autofocus="autofocus">
+              <option value="">TileModels</option>
               <option value="true">True</option>
             <option value="false">False</option>
             </select>
@@ -287,7 +287,7 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <p button class="btn btn-success" onclick  id="updateTileModel()">Update</button></p>
+          <p button class="btn btn-success" onclick ="updateTileModel()">Update</button></p>
           <p id="demo"></p>
         </div>
       </div> 
@@ -312,14 +312,14 @@
         </div>
       </div>
       <div class="form-group">
-          <input type="text" id="productionLogId" class="form-control" placeholder="ProductionLogId" autofocus="autofocus">
+          <input type="text" id="productionLogId" class="form-control" placeholder="PRODUCTIONLOGID" autofocus="autofocus">
       </div>
         <div class="form-group">
-          <input type="text" id="comments" class="form-control" placeholder="Comments" autofocus="autofocus">
+          <input type="text" id="comments" class="form-control" placeholder="COMMENTS" autofocus="autofocus">
           <span id="errorTextarea" style="display: none; color:green; font-size:12px"><b>enter valid details</b></span>
         </div>
         <div class="form-group">
-            <input type="text" id="qtty" class="form-control" placeholder="Quantity" autofocus="autofocus">
+            <input type="text" id="qtty" class="form-control" placeholder="QUANTITY" autofocus="autofocus">
           <span class="error" style="color:green; display: none">Input digits (0 - 9)</span>
         </div>
       </div>
@@ -354,13 +354,13 @@
           document.getElementById("demo").innerHTML = Boolean(true>false);
         }
   var reqHandler = new ReqHandler();
-  function addTile(){ 
+  function addTile(){  
     var tilesObj = {
-      "tileModelName": $("#modelName").val(),
+      "tileModelName": $("#tileModelName").val(),
       "color": $("#color").val(),
       "modelNumber": $("#modelNumber").val(),
       "quantity": $("#quantity").val(),
-      "tileModels": $("#isAvailable").val(),
+      "tileModels": $("#tileModels").val(),
       "modelImage": imageBase64String
     };
     $.post({url: '/tileModel', data: tilesObj }, function (resp) {
@@ -379,7 +379,8 @@
   } 
            // <<<<<<<<<<<<<<<<<<<<<<<<<{ creating a grid }>>>>>>>>>>>>>>>>>>>>>>>
   function getTilesList(){
-    $.get({ url : '/tileModels'}, function(resp){ 
+    $.get({ url : '/tileModel'}, function(resp){ 
+      console.log("getlist check",resp)
       if(resp.status == 'Success'){
         loadTileModelsGrid(resp.result);
       }else{
@@ -407,7 +408,6 @@
             });
             fileReader.readAsDataURL(f);
         });
-
         $("#editImageFile").on("change", function(e) {
           var files = e.target.files, f = files[0];
             var fileReader = new FileReader();
@@ -441,42 +441,42 @@
       var formattedTileModels = [];
         result.forEach(obj=>{
             var tempTileModelsObj = [];
-            tempTileModelsObj.push('<span ><img style="height:50px;width:50px;" src="data:image/png;base64,'+obj.modelImage+'" </span>&nbsp;&nbsp;' + obj.tileModelName);
+            tempTileModelsObj.push('<span ><img style="height:50px;width:50px;" src="data:image/png;base64,'+obj.modelImage+'" </span>&nbsp;&nbsp;' + obj.ModelName);
             tempTileModelsObj.push(obj.color);
             tempTileModelsObj.push(obj.modelNumber);
             tempTileModelsObj.push(obj.quantity);
-            tempTileModelsObj.push(obj.isAvailable);
+            tempTileModelsObj.push(obj.tileModels);
             tempTileModelsObj.push('<button class="btn btn-primary" href="#" data-toggle="modal" data-target="#editTilesModal" onclick="getTileModalById('+obj.tileModelId+')">Edit</button>');
             
             formattedTileModels.push(tempTileModelsObj);
         }); 
-      
-
         // <<<<<<<<<<<<<<<<<<<<<data table>>>>>>>>>>>>>>>>>>>>>>>
         $('#tileModeldataTable').DataTable({
          data: formattedTileModels,
          columns: [
-            { title: "ModelName" },
+            { title: "TileModelName" },
             { title: "Color" },
             { title: "ModelNumber" },
             { title: "Quantiity" },
-            { title: "Availability" },
-            { title: "Action"},
+            { title: "TileModels" },
+             { title: "Action"},
         ],
          bDestroy: true
        });
     }
 
-    function getTileModalById(tileId){
+    function getTileModelId(tileModelId){
       // console.log(tileId);
-      $.get({ url : '/tileModel/'+tileId}, function(resp){ 
+      $.get({ url : '/tileModels/'+tileId}, function(resp){ 
+        console.log('get list checking')
       if(resp.status == 'Success'){
-        var tileObj = resp.result[0];
-        $('#editModelName').val(tileObj.tileModelName);
+        var tileObj = resp.result[0];    
+        // $('#editModelId').val(tileObj.tileModelId);
+        $('#editTileModelName').val(tileObj.tileModelName);
         $('#editColor').val(tileObj.color);
         $('#editModelNumber').val(tileObj.modelNumber);
         $('#editQuantity').val(tileObj.quantity);
-        $('#editIsAvailable').val(tileObj.isAvailable);
+        $('#editTileModels').val(tileObj.tileModels);
         $('.pip').html('');
         var imgSrc = "data:image/png;base64,"+tileObj.modelImage;
         $("<span  class='pip'><img class='imageThumb' src='"+imgSrc+"' title='Tile Image' /><span class='remove' onclick='removeEditFile('"+tileObj.modelImage+"')'>&times;</span>" +
@@ -496,14 +496,14 @@
          // <!-- UPADATE-TILEMODEL-PAGE -->
      function updateTileModel(){ 
         var tilesObj = {
-          "tileModelName": $("#editModelName").val(),
+          "tileModelName": $("#editTileModelName").val(),
           "color": $("#editColor").val(),
           "modelNumber": $("#editModelNumber").val(),
           "quantity": $("#editQuantity").val(),
-          "tileModels": $("#editIsAvailable").val(),
+          "tileModels": $("#editTileModels").val(),
           "modelImage": editImageBase64String
         };
-        $.put({url: '/tileModel/' }, function (resp) {
+        $.put({url: '/tileModels/' }, function (resp) {
           if(resp.status == 'Success'){
             $("#editModelSuccessMess").css("display", "block");
             setTimeout(function(){ 
@@ -519,14 +519,14 @@
      } 
  function getTileModalById(tileId){
     $.get({ url : '/tileModel/'+tileId}, function(resp){ 
+      console.log('##############')
     if(resp.status == 'Success'){
       var tileObj = resp.result[0];
-      $('#editTileId').val(tileObj.tileModelId);
-      $('#editModelName').val(tileObj.tileModelName);
+      $('#editTileModelName').val(tileObj.tileModelName);
       $('#editColor').val(tileObj.color);
       $('#editModelNumber').val(tileObj.modelNumber);
       $('#editQuantity').val(tileObj.quantity);
-      $('#editIsAvailable').val(tileObj.isAvailable);
+      $('#editTileModels').val(tileObj.tileModels);
       $('.pip').html('');
       var imgSrc = "data:image/png;base64,"+tileObj.modelImage;
       $("<span  class=\"pip\"><img class=\"imageThumb\" src=\"" +imgSrc + "\" title=\"TestFile\"/><span id= \"removeEditTile\" class=\"remove\" onclick='removeEditFile(\""+tileObj.modelImage+"\")'>&times;</span>" +
@@ -549,12 +549,11 @@ function removeEditFile(fileObj){
 
  function updateTileModel(){ 
     var tileObj = {
-      "tileModelId" : $("#editTileId").val(),
-      "tileModelName": $("#editModelName").val(),
+      "tileModelName": $("#editTileModelName").val(),
       "color": $("#editColor").val(),
       "modelNumber": $("#editModelNumber").val(),
       "quantity": $("#editQuantity").val(),
-      "tileModels": $("#editIsAvailable").val(),
+      "tileModels": $("#edittileModels").val(),
       "modelImage": editImageBase64String
     };
 

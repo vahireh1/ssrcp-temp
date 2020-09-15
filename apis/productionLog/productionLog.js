@@ -155,7 +155,8 @@ function getList(query, callback) {
 		}
 	});
 }
-
+		   // update function
+		   
 function update(productionLog, callback) {
 	productionLog.dateUpdated = utils.getSystemTime();
 	ProductionLogModel.update({"productionLogId": productionLog.productionLogId}, {$set: productionLog}, function(error, effectedRows) {

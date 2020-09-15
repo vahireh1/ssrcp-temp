@@ -42,8 +42,8 @@ router.get("/home",function(req,res){
   res.sendFile(path + "home.html");
 });
 
-router.get("/models",function(req,res){
-  res.sendFile(path + "tileModels.html");
+router.get("/tileModels",function(req,res){
+  res.sendFile(path + "tileModel.html");
 });
 
 router.get("/productionLog",function(req,res){
@@ -66,7 +66,7 @@ routes(app);
 if (app.get('env') === 'development') {
     // set app defaults for local
     app_host = process.env.HOST || 'localhost';
-    app_port = process.env.PORT || 9000;    
+    app_port = process.env.PORT || 3000;    
 } else {
     //set app defaults for heroku
     app_host = process.env.HOST;
