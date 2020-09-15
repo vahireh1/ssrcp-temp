@@ -6,8 +6,8 @@ var validate = utils.validate;
 
 var TileModel = function() {
     return {
-        // tileModelId: 0,
-        ModelName: null,
+        tileModelId: 0,
+        modelName: null,
         color: null,
         modelNumber: null,
         modelImage: null,

@@ -61,7 +61,14 @@ var mongoUtils = utils.mongoUtils;
 
 function create(tileModel, callback) {
 	var tileModelAPI = TileModelController.TileModelAPI(tileModel);
-    var errorList = [];
+	var errorList = [];
+	if (!tileModelAPI.getTileModelId()) {
+		var e = {
+			 status: VALIDATE.FAIL,
+			 error: utils.formatText(VALIDATE.REQUIRED, 'tileModelId')
+	 };		
+	 errorList.push(e);
+ }
     if (!tileModelAPI.getTileModelName()) {
        	var e = {
 				status: VALIDATE.FAIL,

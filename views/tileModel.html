@@ -137,7 +137,7 @@
             <table class="table table-bordered" id="tileModeldataTable" width="100% " length="100%" cellspacing="0">
                 <thead>
                 <tr>
-                  <!-- <th>S.No</th> -->
+                  <th>TileModelId</th>
                   <th>TileModel Name</th>
                   <th>Color</th>
                   <th>ModelNumber</th>
@@ -245,6 +245,12 @@
               </div>   
               <div id="editTileModelErrorMess" class="alert alert-danger" style="display: none;">
                 <strong>Error!</strong> Please provide valid details.
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="" id="editTileModelId" class="form-control" placeholder="TileModelId" required="required" autofocus="autofocus"class="form-control form-control-sm" class="panel" hidden>
+                <label for="tileModelId">TileModel Id</label>
               </div>
             </div>
           <div class="form-group">
@@ -356,6 +362,7 @@
   var reqHandler = new ReqHandler();
   function addTile(){  
     var tilesObj = {
+      "tileModelId": $("#tileModelId").val(),
       "tileModelName": $("#tileModelName").val(),
       "color": $("#color").val(),
       "modelNumber": $("#modelNumber").val(),
@@ -441,6 +448,7 @@
       var formattedTileModels = [];
         result.forEach(obj=>{
             var tempTileModelsObj = [];
+            tempTileModelsObj.push(obj.tileModelId);
             tempTileModelsObj.push('<span ><img style="height:50px;width:50px;" src="data:image/png;base64,'+obj.modelImage+'" </span>&nbsp;&nbsp;' + obj.ModelName);
             tempTileModelsObj.push(obj.color);
             tempTileModelsObj.push(obj.modelNumber);
@@ -454,6 +462,7 @@
         $('#tileModeldataTable').DataTable({
          data: formattedTileModels,
          columns: [
+            { title: "TileModelId"},
             { title: "TileModelName" },
             { title: "Color" },
             { title: "ModelNumber" },
@@ -466,12 +475,11 @@
     }
 
     function getTileModelId(tileModelId){
-      // console.log(tileId);
-      $.get({ url : '/tileModels/'+tileId}, function(resp){ 
+      $.get({ url : '/tileModels/'+tileModelId}, function(resp){ 
         console.log('get list checking')
       if(resp.status == 'Success'){
         var tileObj = resp.result[0];    
-        // $('#editModelId').val(tileObj.tileModelId);
+         $('#editTileModelId').val(tileObj.tileModelId);
         $('#editTileModelName').val(tileObj.tileModelName);
         $('#editColor').val(tileObj.color);
         $('#editModelNumber').val(tileObj.modelNumber);
@@ -496,6 +504,7 @@
          // <!-- UPADATE-TILEMODEL-PAGE -->
      function updateTileModel(){ 
         var tilesObj = {
+          "tileModelId": $("#editTileModelId").val(),
           "tileModelName": $("#editTileModelName").val(),
           "color": $("#editColor").val(),
           "modelNumber": $("#editModelNumber").val(),
@@ -503,7 +512,8 @@
           "tileModels": $("#editTileModels").val(),
           "modelImage": editImageBase64String
         };
-        $.put({url: '/tileModels/' }, function (resp) {
+        $.put({url: '/tileModel/' }, function (resp) {
+          console.log('put method checking');
           if(resp.status == 'Success'){
             $("#editModelSuccessMess").css("display", "block");
             setTimeout(function(){ 
@@ -517,11 +527,12 @@
           }
         });
      } 
- function getTileModalById(tileId){
-    $.get({ url : '/tileModel/'+tileId}, function(resp){ 
-      console.log('##############')
+ function getTileModalById(tileModelId){
+    $.get({ url : '/tileModel/'+tileModelId}, function(resp){ 
+      console.log('#getTileModalById check');
     if(resp.status == 'Success'){
       var tileObj = resp.result[0];
+      $('editTileModelId').val(tileObj.tileModelId);
       $('#editTileModelName').val(tileObj.tileModelName);
       $('#editColor').val(tileObj.color);
       $('#editModelNumber').val(tileObj.modelNumber);
@@ -549,6 +560,7 @@ function removeEditFile(fileObj){
 
  function updateTileModel(){ 
     var tileObj = {
+      "tileModelId": $("#editTileModelId").val(),
       "tileModelName": $("#editTileModelName").val(),
       "color": $("#editColor").val(),
       "modelNumber": $("#editModelNumber").val(),
@@ -557,7 +569,7 @@ function removeEditFile(fileObj){
       "modelImage": editImageBase64String
     };
 
-    console.log(tileObj);
+    console.log("updateTileModel checking",tileObj);
     $.ajax({
       url: '/tileModel/',
       type: 'PUT',
