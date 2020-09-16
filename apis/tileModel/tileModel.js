@@ -1,6 +1,7 @@
 module.exports = function(app) {    
     app.post('/tileModel',function(req, res){
 		try{
+			console.log('create api testing');
 			create(req.body, function(response){
 				res.json(response);
 			});
@@ -10,7 +11,7 @@ module.exports = function(app) {
     });
     app.get('/tileModel/:tileModelId', function(req, res) {
 		try {
-			console.log("IN AAPI >>>>>>   ", req.params.tileModelId);
+			console.log("IN AAPI >>>>>>1  ", req.params.tileModelId);
 			getDetails(req.params.tileModelId, function(response) {
 				res.json(response);
 			});
@@ -21,7 +22,7 @@ module.exports = function(app) {
   
     app.get('/tileModel',function(req, res){
 		try{
-			console.log("TILEMODELS GET FUNCTION");
+			console.log("IN API>>>>>2", req.params.tileModelId);
 			getList(req.query, function(response){
 				res.json(response);
 			});
@@ -32,7 +33,7 @@ module.exports = function(app) {
 	});
 	app.put('/tileModel',function(req, res){
 		try{
-			console.log('update chaching');
+			console.log('IN api>>>>>>>>>>>>>3', req.params.tileModelId);
 			update(req.parmas.tileModelId, function(response){
 				res.json(response);
 			});

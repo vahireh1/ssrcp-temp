@@ -7,7 +7,7 @@ var validate = utils.validate;
 var TileModel = function() {
     return {
         tileModelId: 0,
-        modelName: null,
+        tileModelName: null,
         color: null,
         modelNumber: null,
         modelImage: null,
@@ -39,7 +39,7 @@ function TileModelAPI(tileModelRecord) {
         }
     };
     tileModel.getTileModelName = function() {
-        return this.modelName;
+        return this.tileModelName;
     };
     tileModel.setTileModelName = function(tileModelName) {
          if (tileModelName) {

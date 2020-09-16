@@ -249,7 +249,7 @@
             </div>
             <div class="form-group">
               <div class="form-label-group">
-                <input type="" id="editTileModelId" class="form-control" placeholder="TileModelId" required="required" autofocus="autofocus"class="form-control form-control-sm" class="panel" hidden>
+                <input type="number" id="editTileModelId" class="form-control" placeholder="TileModelId" required="required" autofocus="autofocus"class="form-control form-control-sm" >
                 <label for="tileModelId">TileModel Id</label>
               </div>
             </div>
@@ -274,7 +274,7 @@
         <div class="form-group">
           <div class="form-label-group">
             <input type="number" id="editQuantity" class="form-control" placeholder="Quantity" required="required" autofocus="autofocus">
-            <label for="quantity">quantity</label>
+            <label for="quantity">Quantity</label>
           </div>
         </div>
         <div class="form-group">
@@ -362,7 +362,6 @@
   var reqHandler = new ReqHandler();
   function addTile(){  
     var tilesObj = {
-      "tileModelId": $("#tileModelId").val(),
       "tileModelName": $("#tileModelName").val(),
       "color": $("#color").val(),
       "modelNumber": $("#modelNumber").val(),
@@ -449,15 +448,18 @@
         result.forEach(obj=>{
             var tempTileModelsObj = [];
             tempTileModelsObj.push(obj.tileModelId);
-            tempTileModelsObj.push('<span ><img style="height:50px;width:50px;" src="data:image/png;base64,'+obj.modelImage+'" </span>&nbsp;&nbsp;' + obj.ModelName);
+            console.log('cheching grid');
+            tempTileModelsObj.push('<span ><img style="height:50px;width:50px;" src="data:image/png;base64,'+obj.modelImage+'" ,</span>&nbsp;&nbsp;' + obj.ModelName);
+            console.log('check updat1')
             tempTileModelsObj.push(obj.color);
             tempTileModelsObj.push(obj.modelNumber);
             tempTileModelsObj.push(obj.quantity);
             tempTileModelsObj.push(obj.tileModels);
             tempTileModelsObj.push('<button class="btn btn-primary" href="#" data-toggle="modal" data-target="#editTilesModal" onclick="getTileModalById('+obj.tileModelId+')">Edit</button>');
-            
             formattedTileModels.push(tempTileModelsObj);
         }); 
+        console.log('check updat2');
+
         // <<<<<<<<<<<<<<<<<<<<<data table>>>>>>>>>>>>>>>>>>>>>>>
         $('#tileModeldataTable').DataTable({
          data: formattedTileModels,
@@ -475,8 +477,9 @@
     }
 
     function getTileModelId(tileModelId){
-      $.get({ url : '/tileModels/'+tileModelId}, function(resp){ 
-        console.log('get list checking')
+      console.log('check updat3>>>>>>>>>>>>>>>>>>>>>');
+      $.get({ url : '/tileModel/'+tileModelId}, function(resp){ 
+        console.log('get list checking', resp);
       if(resp.status == 'Success'){
         var tileObj = resp.result[0];    
          $('#editTileModelId').val(tileObj.tileModelId);
@@ -513,8 +516,9 @@
           "modelImage": editImageBase64String
         };
         $.put({url: '/tileModel/' }, function (resp) {
-          console.log('put method checking');
           if(resp.status == 'Success'){
+            console.log('put method checking**********************');
+
             $("#editModelSuccessMess").css("display", "block");
             setTimeout(function(){ 
               $("#editTileModelSuccessMess").css("display", "none"); 
@@ -532,7 +536,7 @@
       console.log('#getTileModalById check');
     if(resp.status == 'Success'){
       var tileObj = resp.result[0];
-      $('editTileModelId').val(tileObj.tileModelId);
+      $('#editTileModelId').val(tileObj.tileModelId);
       $('#editTileModelName').val(tileObj.tileModelName);
       $('#editColor').val(tileObj.color);
       $('#editModelNumber').val(tileObj.modelNumber);
@@ -558,7 +562,7 @@ function removeEditFile(fileObj){
   }
 }
 
- function updateTileModel(){ 
+ function updateTileModel(tileModelId){ 
     var tileObj = {
       "tileModelId": $("#editTileModelId").val(),
       "tileModelName": $("#editTileModelName").val(),
@@ -568,39 +572,38 @@ function removeEditFile(fileObj){
       "tileModels": $("#edittileModels").val(),
       "modelImage": editImageBase64String
     };
-
     console.log("updateTileModel checking",tileObj);
-    $.ajax({
-      url: '/tileModel/',
-      type: 'PUT',
-      data : tileObj,
-      success: function(response) {
-        if(response.status == 'Success'){
-          $("#editTileModelSuccessMess").css("display", "block");
-          setTimeout(function(){ 
-            $("#editTileModelSuccessMess").css("display", "none"); 
-            $("#editTilesModal").modal('hide');
-            getTilesList();
-          }, 3000);
-        }else{
-          $("#editTileModelErrorMess").css("display", "block");
-          setTimeout(function(){ $("#editTileModelErrorMess").css("display", "none"); }, 4000);
-        }
-      }
-    });
-    // reqHandler.put({url: '/tileModel/'}, function (resp) {
-    //   if(resp.status == 'Success'){
-    //     $("#editModelSuccessMess").css("display", "block");
-    //     setTimeout(function(){ 
-    //       $("#editTileModelSuccessMess").css("display", "none"); 
-    //       $("#editTileModel").modal('hide');
-    //       getTilesList();
-    //     }, 3000);
-    //   }else{
-    //     $("#editModelErrorMess").css("display", "block");
-    //     setTimeout(function(){ $("#editModelErrorMess").css("display", "none"); }, 4000);
+    // $.ajax({
+    //   url: '/tileModel/',
+    //   type: 'PUT',
+    //   data : tileObj,
+    //   success: function(response) {
+    //     if(response.status == 'Success'){
+    //       $("#editTileModelSuccessMess").css("display", "block");
+    //       setTimeout(function(){ 
+    //         $("#editTileModelSuccessMess").css("display", "none"); 
+    //         $("#editTilesModal").modal('hide');
+    //         getTilesList();
+    //       }, 3000);
+    //     }else{
+    //       $("#editTileModelErrorMess").css("display", "block");
+    //       setTimeout(function(){ $("#editTileModelErrorMess").css("display", "none"); }, 4000);
+    //     }
     //   }
     // });
+      $.put({url: '/tileModel/'+tileModelId}, function (resp) {
+      if(resp.status == 'Success'){
+        $("#editModelSuccessMess").css("display", "block");
+        setTimeout(function(){ 
+          $("#editTileModelSuccessMess").css("display", "none"); 
+          $("#editTileModel").modal('hide');
+          getTilesList();
+        }, 3000);
+      }else{
+        $("#editModelErrorMess").css("display", "block");
+        setTimeout(function(){ $("#editModelErrorMess").css("display", "none"); }, 4000);
+      }
+    });
   } 
     </script>
   </body>
