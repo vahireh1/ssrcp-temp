@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <title></title>
 <head>
  
    <!-- Custom fonts for this template-->
@@ -487,7 +488,7 @@
         $('#editColor').val(tileObj.color);
         $('#editModelNumber').val(tileObj.modelNumber);
         $('#editQuantity').val(tileObj.quantity);
-        $('#editTileModels').val(tileObj.tileModels);
+        $('#editTileModels').val(tileObj.tileModels+);
         $('.pip').html('');
         var imgSrc = "data:image/png;base64,"+tileObj.modelImage;
         $("<span  class='pip'><img class='imageThumb' src='"+imgSrc+"' title='Tile Image' /><span class='remove' onclick='removeEditFile('"+tileObj.modelImage+"')'>&times;</span>" +
