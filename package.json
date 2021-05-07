@@ -22,7 +22,7 @@
     "nodemailer-smtp-transport": "^2.7.4",
     "nodemon": "^1.19.1",
     "path": "^0.12.7",
-    "underscore": "^1.9.1",
+    "underscore": "^1.12.1",
     "validator": "^10.11.0"
   },
   "devDependencies": {}
